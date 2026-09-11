@@ -4,7 +4,7 @@
 int main()
 {
     // number hunter project
-    int choice;
+    int choice,guess=0;
     printf("=============================\n");
     printf("   WELCOME TO NUMBER HUNTER   \n");
     printf("=============================\n\n");
@@ -17,7 +17,15 @@ int main()
         printf("Game starting...\n");
         srand(time(NULL));
         int secretnumber = rand() %100 + 1;
-        printf("The computer has chosen a number: %d\n",secretnumber);
+        do {
+        printf("Let's take your guess: ");
+        scanf("%d",&guess);
+        if (guess>secretnumber)
+        printf("Too high!\n");
+        else if(guess<secretnumber)
+        printf("Too low!\n");
+        else printf("Congratulations!!\n");
+        }while(guess != secretnumber);
     }
     else if (choice == 2){
         printf("Goodbye!");
