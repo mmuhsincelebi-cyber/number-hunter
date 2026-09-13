@@ -4,7 +4,8 @@
 int main()
 {
     // number hunter project
-    int choice, guess = 0, attempts = 0, difficulty = 0, step = 0, valid = 1, restart = 0;
+    int choice, guess = 0, attempts = 0, difficulty = 0, step = 0;
+    int valid = 1, restart = 0, result = 0, c = 0;
 
     printf("=============================\n");
     printf("   WELCOME TO NUMBER HUNTER   \n");
@@ -12,9 +13,33 @@ int main()
 
     printf("1- Start game\n\n");
     printf("2- Exit\n\n\n");
-    printf("Choose: ");
-    scanf("%d", &choice);
-    printf("\n");
+
+    do
+    {
+        printf("Choose: ");
+        result = scanf("%d", &choice);
+        printf("\n");
+        if (result == 0)
+        {
+        printf("Invalid guess! Please enter a number!\n\n");
+        while (getchar() != '\n')
+        {
+        }
+          }
+        else if (result == 1 )
+        {
+            c = getchar();
+            if (choice<1 || choice>2)
+            printf("Enter a number between (1-2)\n\n");
+            if (c != '\n')
+            {
+                while (getchar() != '\n')
+                {
+                }
+            }
+              }
+
+    } while (result == 0 || choice<1 || choice>2);
 
     if (choice == 1)
     {
@@ -30,8 +55,30 @@ int main()
             printf("1 - Easy   (15 attempts)\n");
             printf("2 - Normal (10 attempts)\n");
             printf("3 - Hard   (5 attempts)\n");
+            do {
             printf("Choose the difficulty: ");
-            scanf("%d", &difficulty);
+            result = scanf("%d", &difficulty);
+             if (result == 0)
+        {
+        printf("Invalid guess! Please enter a number!\n\n");
+        while (getchar() != '\n')
+        {
+        }
+          }
+        else if (result == 1 )
+        {
+            c = getchar();
+            if (difficulty<1 || difficulty>3)
+            printf("Enter a number between (1-3)\n\n");
+            if (c != '\n')
+            {
+                while (getchar() != '\n')
+                {
+                }
+            }
+        }
+
+            }while (result == 0 || difficulty<1 || difficulty>3);
 
             switch (difficulty)
             {
@@ -57,9 +104,43 @@ int main()
             {
                 do
                 {
-                    printf("\nAttempts left: %d\n", attempts);
-                    printf("Let's take your guess: ");
-                    scanf("%d", &guess);
+                    do
+                    {
+                        printf("\nAttempts left: %d\n", attempts);
+                        printf("Let's take your guess: ");
+
+                        result = scanf("%d", &guess);
+
+                        if (result == 0)
+                        {
+                            printf("Invalid guess! Please enter a number!\n\n");
+
+                            while (getchar() != '\n')
+                            {
+                            }
+                        }
+                        else
+                        {
+                            c = getchar();
+
+                            if (c != '\n')
+                            {
+                                while (getchar() != '\n')
+                                {
+                                }
+                            }
+
+                            if (guess < 1 || guess > 100)
+                            {
+                                printf("Invalid guess! Please enter a number between 1 and 100!\n\n");
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+
+                    } while (result == 0 || (guess < 1 || guess > 100));
 
                     step++;
 
@@ -89,15 +170,40 @@ int main()
 
                 } while (guess != secretNumber);
             }
+
+            do {
             printf("Wanna play again? (1-Yes / 2-No): \n");
-            scanf("%d",&restart);
-            step=0;
-            valid=1;
+            result = scanf("%d", &restart);
+            if (result == 0)
+        {
+        printf("Invalid input! Please enter a number (1-2)!\n\n");
+        while (getchar() != '\n')
+        {
+        }
+          }
+        else if (result == 1 )
+        {
+            c = getchar();
+            if (restart<1 || restart>2)
+            printf("Enter a number between (1-2)\n\n");
+            if (c != '\n')
+            {
+                while (getchar() != '\n')
+                {
+                }
+            }
+        }
+            }while(result == 0 || restart<1 || restart>2);
+
+            step = 0;
+            valid = 1;
+
             if (restart == 2)
             {
-            printf("Goodbye!!");
-            break;
+                printf("Goodbye!!");
+                break;
             }
+
         } while (restart == 1);
     }
     else if (choice == 2)
