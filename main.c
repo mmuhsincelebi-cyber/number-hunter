@@ -1,15 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-void playGame(int difficulty);
+int playGame(int difficulty);
 int getAttempts(int difficulty);
 int getGuess();
 int getValidNumber(int min, int max,char message[]);
+int getScore(int difficulty);
 int main()
 {
     // number hunter project
-    int choice=0, difficulty = 0,restart=0;
-
+    int choice=0, difficulty = 0,restart=0,totalScore=0;
 
     printf("=============================\n");
     printf("   WELCOME TO NUMBER HUNTER   \n");
@@ -27,13 +27,14 @@ int main()
         {
             printf("Game starting...\n");
             printf("I have chosen a number between 1 and 100\n\n");
-            printf("1 - Easy   (15 attempts)\n");
-            printf("2 - Normal (10 attempts)\n");
-            printf("3 - Hard   (5 attempts)\n");
+            printf("1 - Easy (15 attempts) -- 100 score\n");
+            printf("2 - Normal (10 attempts) -- 200 score\n");
+            printf("3 - Hard (5 attempts) -- 300 score\n");
 
               difficulty = getValidNumber(1, 3,"Choose the difficulty: ");
-              playGame(difficulty);
+              totalScore += playGame(difficulty);
 
+              printf("Your total score is: %d\n",totalScore);
               restart = getValidNumber(1, 2, "Wanna play again? (1-Yes / 2-No): ");
             if (restart == 2)
             {
@@ -55,9 +56,9 @@ int main()
     return 0;
 }
 
-void playGame(int difficulty)
+int playGame(int difficulty)
 {
-    int attempts = 0, guess = 0, step = 0;
+    int attempts = 0,guess = 0,step = 0,score=0;
     int secretNumber = rand() % 100 + 1;
 
     attempts = getAttempts(difficulty);
@@ -80,9 +81,11 @@ void playGame(int difficulty)
         }
         else
         {
+            score = getScore(difficulty);
             printf("Congratulations!!\n");
-            printf("You found the number in %d attempts!\n\n", step);
-            break;
+            printf("You found the number in %d attempts!\n", step);
+            printf("Your current score is: %d\n\n",score);
+            return score;
         }
 
         attempts--;
@@ -90,8 +93,9 @@ void playGame(int difficulty)
         if (attempts == 0)
         {
             printf("Game Over!\n");
-            printf("The secret number was %d\n\n", secretNumber);
-            break;
+            printf("The secret number was %d\n", secretNumber);
+            printf("Your current score is: %d\n\n",score);
+            return 0;
         }
 
     } while (guess != secretNumber);
@@ -186,3 +190,11 @@ do {
                }while (result == 0|| number<min || number>max);
 
   }
+  int getScore(int difficulty){
+
+  switch (difficulty){
+  case 1:return 100;
+  case 2:  return 200;
+  case 3: return 300;
+    }
+      }
