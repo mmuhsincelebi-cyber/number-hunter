@@ -1,9 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
 
 int playGame(int difficulty, int* gamesWon);
 int getAttempts(int difficulty);
